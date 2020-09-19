@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -34,6 +35,12 @@ public class DeliveryAddress {
 	@Column(name = "country", nullable = false)
 	private String country;
 
+	/*
+	 * One To One Bidirectional Relationship
+	 */
+	@OneToOne(mappedBy = "deliveryAddress")
+	private UserProfile userProfile; // parrent
+	
 	public DeliveryAddress() {
 	}
 

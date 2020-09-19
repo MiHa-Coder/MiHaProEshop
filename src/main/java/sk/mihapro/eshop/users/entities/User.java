@@ -5,8 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
 
 /**
  * Entity user class, contains users basic details that are stored in database table users.
@@ -31,21 +34,27 @@ public class User {
 	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@Column(name = "first_name", nullable = false)
-	private String firstName;
-	
-	@Column(name = "last_name", nullable = false)
-	private String lastName;
-	
-	@Column(name = "phone_number", nullable = false)
-	private String phoneNumber;
-	
 	@Column(name = "enabled", nullable = false)
 	private boolean enabled;
+	
+//	@ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
+//	@JoinTable(name = "users_roles",
+//			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+//			inverseJoinColumns = @JoinColumn(name= "role_id", referencedColumnName = "id"))
+//	List<GrantedAuthority> authorities;
 
+	
+	/*
+	 * One To One Bidirectional Relationship
+	 */
+	@OneToOne
+	@JoinColumn(name = "user_profile_id", referencedColumnName = "id")
+	private UserProfile userProfile; //child
+	
 	public User() {
+		
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -70,36 +79,20 @@ public class User {
 		this.password = password;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 	public boolean isEnabled() {
 		return enabled;
 	}
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
 	}
 	
 	
