@@ -28,22 +28,21 @@ public class User {
 	@Column(name = "id", nullable = false, unique = true, updatable = false)
 	private Long id;
 	
-	@Column(name = "email", nullable = false, unique = true)
+	@Column(name = "email", unique = true)
 	private String email;
 	
-	@Column(name = "password", nullable = false)
+	@Column(name = "password")
 	private String password;
 	
-	@Column(name = "enabled", nullable = false)
+	@Column(name = "enabled")
 	private boolean enabled;
-	
-//	@ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
-//	@JoinTable(name = "users_roles",
-//			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-//			inverseJoinColumns = @JoinColumn(name= "role_id", referencedColumnName = "id"))
-//	List<GrantedAuthority> authorities;
 
-	
+	/*
+	 * One To One Bidirectional Relationship
+	 */
+	@OneToOne
+	@JoinColumn(name = "authorities_id", referencedColumnName = "id")
+	private Role authorities; // child
 	/*
 	 * One To One Bidirectional Relationship
 	 */
@@ -85,6 +84,16 @@ public class User {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	
+	
+
+	public Role getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Role authorities) {
+		this.authorities = authorities;
 	}
 
 	public UserProfile getUserProfile() {

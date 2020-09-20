@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -28,8 +29,14 @@ public class Role implements GrantedAuthority{
 	@Column(name = "id", nullable = false, unique = true, updatable = false)
 	private Long id;
 
-	@Column(name = "role", unique = true, nullable = false)
+	@Column(name = "role", unique = true)
 	private String role;
+	
+	/*
+	 * One To One Bidirectional Relationship
+	 */
+	@OneToOne(mappedBy = "authorities")
+	private User user; //parrent
 	
 	public Role() {
 	}

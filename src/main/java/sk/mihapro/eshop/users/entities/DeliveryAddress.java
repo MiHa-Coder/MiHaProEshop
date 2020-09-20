@@ -23,16 +23,16 @@ public class DeliveryAddress {
 	@Column(name = "id", nullable = false, unique = true, updatable = false)
 	private Long id;
 
-	@Column(name = "street_name", nullable = false)
+	@Column(name = "street_name")
 	private String streetName;
 
-	@Column(name = "post_code", nullable = false)
+	@Column(name = "post_code")
 	private String postCode;
 
-	@Column(name = "city", nullable = false)
+	@Column(name = "city")
 	private String city;
 
-	@Column(name = "country", nullable = false)
+	@Column(name = "country")
 	private String country;
 
 	/*
